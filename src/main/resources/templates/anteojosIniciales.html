@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>Grand Vision</title>
+<link type="text/css" rel="stylesheet"
+	href="font/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/jquery-ui.css"></link>
+<link rel="stylesheet" href="css/app.css"></link>
+<link type="text/css" rel="stylesheet" href="css/clientes.css" />
+
+<script src="js/jquery.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/clientesJQ.js"></script>
+<script src="js/jquery-ui.js"></script>
+</head>
+<body ng-app="myApp" style="padding-left: 20px; padding-right: 20px;">
+	<div class="container anteojos-iniciales panel panel-primary">
+		<div class="panel-heading title-section">Anteojos Iniciales</div>
+		<div class="panel-body"
+			data-ng-controller="anteojosInicialesController"
+			th:attr="ng-init='setAnteojosJson(\''+${anteojosJson}+'\');'">
+
+			<div class="table-cell">
+				<table class="table" cellspacing="0">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Uso</th>
+							<th>Origen</th>
+							<th>Antigüedad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="anteojo : ${anteojos}"
+							th:attr="ng-mouseover ='verDetalles(\''+${anteojo.id_anteojo}+'\');'">
+							<th>1</th>
+							<td><p th:text="${anteojo.uso}" /></td>
+							<td><p th:text="${anteojo.origen}" /></td>
+							<td><p th:text="${anteojo.antiguedad}" /></td>
+						</tr>
+					</tbody>
+				</table>
+				<button id="dialog_agregar_anteojos_link" type="button"
+					class=" btn-default glyphicon glyphicon-plus"
+					style="position: absolute; right: 0;"></button>
+
+
+				<div class="panel panel-default" ng-show="anteojo_selected != null">
+					<!-- Default panel contents -->
+					<div class="panel-heading">RX</div>
+					<table class="table" cellspacing="0">
+						<!-- THEAD -->
+						<thead>
+							<tr>
+								<th></th>
+								<th>Esfera</th>
+								<th>Cilindro</th>
+								<th>Eje</th>
+								<th>Adición</th>
+								<th>A/V</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<th>Derecho</th>
+								<td>{{anteojo_selected.esfera_derecho}}</td>
+								<td>{{anteojo_selected.cilindro_derecho}}</td>
+								<td>{{anteojo_selected.eje_derecho}}</td>
+								<td>{{anteojo_selected.adicion_derecho}}</td>
+								<td>20/ {{anteojo_selected.av_derecho}}</td>
+							</tr>
+							<tr>
+								<th>Izquierdo</th>
+								<td>{{anteojo_selected.esfera_izquierdo}}</td>
+								<td>{{anteojo_selected.cilindro_izquierdo}}</td>
+								<td>{{anteojo_selected.eje_izquierdo}}</td>
+								<td>{{anteojo_selected.adicion_izquierdo}}</td>
+								<td>20/ {{anteojo_selected.adicion_izquierdo}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- table cell -->
+		</div>
+	</div>
+	<!-- agregar anteojos-->
+	<div id="dialog_agrega_anteojos" title="Agregar Contacto"
+		style="display: none;">
+		<form data-ng-controller="agregarAnteojoSubmitController"
+			th:attr="ng-init='setIdAnteojosClient(\''+${idCliente_anteojos}+'\');'">
+			<div class="container agregar-anteojos panel panel-primary">
+				<!-- <div class="panel-heading title-section">Agregar Anteojos</div>-->
+				<div class="panel-body">
+					<div class="wrapper-selects">
+						<div class="table-cell">
+							<label for="uso">Uso</label> <select name="uso" id="uso"
+								class="form-control" data-ng-model="inputUsoAnteojos">
+								<option value="">-</option>
+								<option value="lejos">Lejos</option>
+								<option value="cerca">Cerca</option>
+								<option value="progresivo">Progresivo</option>
+								<option value="bifocal">Bifocal</option>
+							</select>
+						</div>
+						<div class="table-cell">
+							<label for="origen">Origen</label> <select name="origen"
+								id="origen" class="form-control"
+								data-ng-model="inputOrigenAnteojos">
+								<option value="">-</option>
+								<option value="lux">Lux</option>
+								<option value="mas-vision">Mas Visión</option>
+								<option value="liverpool">Liverpool</option>
+								<option value="palacio-de-hierro">Palacio de Hierro</option>
+								<option value="otro">Otro ...</option>
+							</select>
+						</div>
+						<div class="table-cell">
+							<label for="antiguedad">Antiguedad</label> <select
+								name="antiguedad" id="antiguedad" class="form-control"
+								data-ng-model="inputAntiguedadAnteojos">
+								<option value="">-</option>
+								<option value="1" id="1">1</option>
+								<option value="2" id="2">2</option>
+								<option value="3" id="3">3</option>
+								<option value="4" id="4">4</option>
+								<option value="5" id="5">5</option>
+								<option value="6" id="6">6</option>
+								<option value="7" id="7">7</option>
+								<option value="8" id="8">8</option>
+								<option value="9" id="9">9</option>
+								<option value="10" id="10">10</option>
+								<option value="11" id="11">11</option>
+								<option value="12" id="12">12</option>
+								<option value="13" id="13">13</option>
+								<option value="14" id="14">14</option>
+								<option value="15" id="15">15</option>
+								<option value="16" id="16">16</option>
+								<option value="17" id="17">17</option>
+								<option value="18" id="18">18</option>
+								<option value="19" id="19">19</option>
+								<option value="20" id="20">20</option>
+								<option value="21" id="21">21</option>
+								<option value="22" id="22">22</option>
+								<option value="23" id="23">23</option>
+								<option value="24" id="24">24</option>
+								<option value="25" id="25">25</option>
+								<option value="26" id="26">26</option>
+								<option value="27" id="27">27</option>
+								<option value="28" id="28">28</option>
+								<option value="29" id="29">29</option>
+								<option value="30" id="30">30</option>
+								<option value="31" id="31">31</option>
+								<option value="32" id="32">32</option>
+								<option value="33" id="33">33</option>
+								<option value="34" id="34">34</option>
+								<option value="35" id="35">35</option>
+								<option value="36" id="36">36</option>
+								<option value="37" id="37">37</option>
+								<option value="38" id="38">38</option>
+								<option value="39" id="39">39</option>
+								<option value="40" id="40">40</option>
+								<option value="41" id="41">41</option>
+								<option value="42" id="42">42</option>
+								<option value="43" id="43">43</option>
+								<option value="44" id="44">44</option>
+								<option value="45" id="45">45</option>
+								<option value="46" id="46">46</option>
+								<option value="47" id="47">47</option>
+								<option value="48" id="48">48</option>
+								<option value="49" id="49">49</option>
+								<option value="50" id="50">50</option>
+							</select>
+						</div>
+					</div>
+
+
+					<div class="panel panel-default">
+						<!-- Default panel contents -->
+						<div class="panel-heading">RX</div>
+
+						<table class="table" cellspacing="0">
+							<!-- THEAD -->
+							<thead>
+								<tr>
+									<th></th>
+									<th>Esfera</th>
+									<th>Cilindro</th>
+									<th>Eje</th>
+									<th>Adición</th>
+									<th>A/V</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<th>Derecho</th>
+									<td><input type="text" class="form-control"
+										data-ng-model="esfera_derecho"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="cilindro_derecho"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="eje_derecho"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="adicion_derecho"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="av_derecho"></input></td>
+								</tr>
+								<tr>
+									<th>Izquierdo</th>
+									<td><input type="text" class="form-control"
+										data-ng-model="esfera_izquierdo"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="cilindro_izquierdo"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="eje_izquierdo"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="adicion_izquierdo"></input></td>
+									<td><input type="text" class="form-control"
+										data-ng-model="av_izquierdo"></input></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<button class="btn-default btn-success" ng-click="submit();">Guardar</button>
+				</div>
+			</div>
+			<!-- container -->
+		</form>
+	</div>
+</body>
+</html>

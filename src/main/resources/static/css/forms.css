@@ -1,0 +1,70 @@
+input, label, select{
+	width: 200px;
+	display: inline-block;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+textarea{
+	border: solid 1px #ddd;
+	display: inline-block;
+	margin-bottom: 5px;
+	width: 700px;
+}
+label{
+	font-weight: bold;
+}
+input{
+	padding: 8px;
+	border: solid 1px #ddd;
+}
+hr{
+	height: 0;
+	display: block;
+	border-top: solid 1px #ddd;
+	box-shadow: none;
+}
+.container{
+	position: relative;
+	font-size: 80%;
+	padding: 20px;
+	width: 900px;
+	min-width: 900px;
+	max-width: 900px;
+	margin: 0 auto;
+}
+.wrapper{
+	float: left;
+	padding-left: 50px;
+	margin-bottom: 15px;
+}
+.table-cell{
+	float: left;
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+.table-cell-50{
+	display: table;
+	float: left;
+	width: 50%;
+}
+button{
+	border: solid 1px #ddd!important;
+	padding: 10px;
+	border-radius: 5px;
+	font-weight: bolder;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+	outline: none;
+}
+button:hover{
+	cursor: pointer;
+}
+.add-button{
+	width: 30px;
+	position: absolute;
+	bottom: 5px;
+	right: 0;
+}

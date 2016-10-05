@@ -1,0 +1,128 @@
+@charset "utf-8";
+/* CSS Document */
+/*contenedor*/
+#all{
+	position: absolute;
+	top: 10px;
+	left: 100px;
+	width:600px;
+	height:424px;
+	background-color: #E6E6E6;
+	border: solid 1px #333;
+	border-radius: 10px 10px 0px 0px;
+	background-image:url('bg1.png');
+	background-repeat:no-repeat;
+	z-index: 1;
+	font:12px/14px Arial, Helvetica, sans-serif;
+	
+}
+#titulo_pleca{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width:580px;
+	height:30px;
+	background-color: #404040;
+	border-radius: 10px 10px 0px 0px;
+	z-index: 3;
+	color:#FFF;
+	font:12px/30px Arial, Helvetica, sans-serif;
+	padding: 0px 10px;
+}
+#tabla_inicial {
+	position: absolute;
+	top: 38px;
+	left: 22px;
+	width: 433px;
+	height: 67px;
+
+	background:#;
+	border-spacing: 1px;
+	border-collapse: separate;
+}
+#tabla_inicial th {
+font:12px/14px Arial, Helvetica, sans-serif;
+text-align: left;
+border-spacing: 4px;
+}
+.campos{
+	border: solid 1px #666;
+	border-radius:3px;
+	font:12px/14px Arial, Helvetica, sans-serif;
+    text-align:left;
+	margin-left:5px;
+	height:18px;
+}
+.buscar{
+	background:#666;
+	border: solid 1px #666;
+	border-radius:6px;
+	font:12px/14px Arial, Helvetica, sans-serif;
+	color: #FFF;
+    text-align: center;
+	margin-left:5px;
+	height:21px;
+	cursor:pointer;
+}
+#agre_cliente {
+	position: absolute;
+	top: 121px;
+	left: 541px;
+	width: 20px;
+	height: 20px;
+	font:15px/20px Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	text-align: Center;
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1), rgba(190,190,190,1));
+	background: -o-linear-gradient(bottom, rgba(255,255,255,1), rgba(190,190,190,1));
+	background: -moz-linear-gradient(bottom, rgba(255,255,255,1), rgba(190,190,190,1));
+	background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(190,190,190,1));
+	border: solid 1px #666;
+	color: #202020;
+	cursor:pointer;
+}
+#tabla_coincidencias {
+	position: absolute;
+	top: 121px;
+	left: 22px;
+	width: 520px;
+	height: 67px;
+	background:#;
+	border-collapse: collapse;
+	border: solid 1px #666;
+}
+#tabla_coincidencias th {
+font:11px/13px Arial, Helvetica, sans-serif;
+text-align: Center;
+background: -webkit-linear-gradient(top, rgba(255,255,255,1), rgba(190,190,190,1)); 
+    background: -o-linear-gradient(bottom, rgba(255,255,255,1), rgba(190,190,190,1)); 
+    background: -moz-linear-gradient(bottom, rgba(255,255,255,1), rgba(190,190,190,1)); 
+    background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(190,190,190,1)); 
+	border: solid 1px #666;
+	color: #585858;
+	height:18px;
+}
+#tabla_coincidencias td{
+	font:11px/13px Arial, Helvetica, sans-serif;
+	text-align: left;
+	background-color: #FFF;
+	border: solid 1px #666;
+	color: #585858;
+	height:14px;
+}
+#info_completa {
+	position: absolute;
+	top: 335px;
+	left: 22px;
+	width: 500px;
+	height: 44px;
+	background-color:#FFF;
+	border: solid 1px #666;
+	border-radius: 8px;
+	font:12px/15px Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: left;
+	padding:10px;
+}
+
+

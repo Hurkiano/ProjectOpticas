@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Grand Vision</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet"
+	href="font/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/jquery-ui.css"></link>
+<link type="text/css" rel="stylesheet" href="css/clientes.css" />
+
+<script src="js/jquery.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/clientesJQ.js"></script>
+<script src="js/jquery-ui.js"></script>
+</head>
+<body ng-app="myApp" style="padding-left: 20px; padding-right: 20px;"
+	data-ng-controller="FormSubmitController">
+	<!-- content  -->
+
+	<div id="dialog_clientes" title="Buscar Clientes" class="buscarModal">
+		<div style="width: 1000px;">
+			<form data-ng-submit="submit()">
+				<div class="div_clientes">
+					<label for="inputFechaNacimiento">F. Nacimiento</label> <input
+						type="text" name="inputFechaNacimiento" id="inputFechaNacimiento"
+						data-ng-model="inputFechaNacimiento" />
+				</div>
+				<div class="div_clientes">
+					<label for="inputApaterno">Paterno</label> <input type="text"
+						name="inputApaterno" id="inputApaterno"
+						data-ng-model="inputApaterno"
+						onblur="javascript:this.value=this.value.toUpperCase();" />
+				</div>
+				<div class="div_clientes">
+					<label for="inputNombreCliente">Nombre</label> <input type="text"
+						name="inputNombreCliente" id="inputNombreCliente"
+						data-ng-model="inputNombreCliente"
+						onblur="javascript:this.value=this.value.toUpperCase();" />
+				</div>
+				<div class="div_clientes">
+					<button type="submit" style="margin-top: 10px;"
+						class="ui-button ui-corner-all ui-widget">
+						Buscar <i class="fa fa-search" aria-hidden="true"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+		<div id="table_section">
+			<div>
+				<div style="color: #00897b;" ng-show="loaderDiv != null"
+					class="centrar">
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span
+						class="sr-only">Loading...</span>
+				</div>
+				<div ng-show="noData != null">
+					<div style="width: 1050px;">
+						<div
+							style="padding-left: 45px; width: 750px; float: left; text-align: center;">
+							<div class="ui-widget">
+								<div class="ui-state-highlight ui-corner-all"
+									style="margin-top: 20px; padding: 0 .7em;">
+									<p>
+										<span class="ui-icon ui-icon-info"
+											style="float: left; margin-right: .3em;"></span> <strong>{{noData}}</strong>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div style="width: 200px; float: left; padding-top: 20px;">
+							<a class="ui-button ui-corner-all ui-widget"
+								href="/agregarCliente"> <i class="fa fa-plus"
+								aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div ng-show="customers != null">
+					<div style="width: 1050px;">
+						<div
+							style="padding-left: 20px; padding-top: 50px; width: 700px; float: left;">
+							<table id="findClients" style="border: 1px solid #bdbdbd;">
+								<thead>
+									<tr>
+										<!--<th>Sucursal</th>-->
+										<th style="border-right: 1px solid #bdbdbd">F. Nacimiento</th>
+										<th style="border-right: 1px solid #bdbdbd">Nombre</th>
+										<th style="border-right: 1px solid #bdbdbd">Paterno</th>
+										<th style="border-right: 1px solid #bdbdbd">Materno</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="customer in customers" ng-init="paso = $index;"
+										ng-mouseover="verCliente($index);">
+										<!--<td>{{ customer.sucursal}}</td>-->
+										<td ng-click="modificarCliente( customer.id);"> {{ customer.fechaNacimiento}}</td>
+										<td ng-click="modificarCliente( customer.id);">{{ customer.nombre}}</td>
+										<td ng-click="modificarCliente( customer.id);">{{ customer.aPaterno}}</td>
+										<td ng-click="modificarCliente( customer.id);">{{ customer.aMaterno}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div
+							style="width: 300px; padding-top: 50px; padding-left: 0px; float: left;">
+							<a class="ui-button ui-corner-all ui-widget"
+								href="/agregarCliente"> <i class="fa fa-plus"
+								aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+		<br />
+		<!-- Sección de contactos -->
+		<div ng-show="contacts != null" class="infoDetallada">
+			<table style="width: 680px;">
+				<tr>
+					<td style="text-align: right; width: 150px;"><strong>Calle:</strong></td>
+					<td style="padding-left: 15px; width: 300px;">{{customer_selected.calle}}</td>
+					<td style= "float: right;" ><button class="detallesTD ui-button ui-corner-all ui-widget" style="color: #303f9f;"
+						><i class="fa fa-plus-circle" aria-hidden="true"></i> INFO</button></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;  width: 150px;"><strong>Colonia:</strong></td>
+					<td colspan="2" style="padding-left: 15px; width: 300px;">{{customer_selected.colonia}}</td>
+					
+				</tr>
+				<tr ng-repeat="contact in contacts">
+					<td style="text-align: right;width: 150px;"><strong>{{ contact.tipo}}:</strong></td>
+					<td colspan="2" style="padding-left: 15px;">{{ contact.valor}}</td>
+					
+				</tr>
+			</table>
+		
+		</div>
+	</div>
+	<div
+		style="width: 100%; position: static; height: 150px; background-color: #e0e0e0;">
+		<div style="width: 33%; float: left;">
+			<div style="height: 10px;">
+				<label for="inputCliente">Cliente</label> <input type="text"
+					class="" id="inputCliente" placeholder=""></input>
+			</div>
+			<br /> <br /> <label for="inputTipo">Tipo</label> <select
+				id="inputTipoTransaccion" name="inputTipoTransaccion" class="">
+				<option value="0">Público General</option>
+				<option value="1">Cliente Nuevo</option>
+				<option value="3">Cliente en Proceso</option>
+				<option value="4">Cliente en Caja</option>
+				<option value="5">Cotización</option>
+				<option value="6">Editar Cliente Caja</option>
+			</select>
+		</div>
+		<div style="width: 33%; float: left;">
+			<div class="">
+				<label>Folio</label>
+			</div>
+			<div class="">
+				<label>Factura</label>
+			</div>
+		</div>
+		<div style="width: 33%; float: right;">
+			<div class="">
+				<label>Venta</label>
+			</div>
+			<div class="">
+				<label>Pagado</label>
+			</div>
+			<div class="">
+				<label>Saldo</label>
+			</div>
+		</div>
+	</div>
+	<div style="width: 100%; position: static;">
+		<div style="height: 100px; background-color: #e0e0e0;">
+			<div>
+				<label>Artículos</label>
+			</div>
+		</div>
+
+	</div>
+	<div style="width: 100%; position: static;">
+		<div
+			style="height: 150px; background-color: #e0e0e0; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #bdbdbd;">
+			<div>
+				<label>Promociones</label>
+			</div>
+		</div>
+		<div style="height: 150px; background-color: #e0e0e0;">
+			<div>
+				<label>Pagos</label>
+			</div>
+		</div>
+	</div>
+	<div style="width: 100%; position: static;">
+		<div style="height: 100px; background-color: #e0e0e0;">
+			<div>
+				<label for="inputObs">Observaciones:</label><br></br>
+				<textarea id="inputObs" cols="50" rows="3">
+				</textarea>
+			</div>
+		</div>
+	</div>
+	<div id="dialog_clientes_selected" title="Cliente"
+		style="display: none;">
+		<div>
+			<table id="general_info">
+				<tr>
+					<td style="text-align: right; width: 200px;"><strong>F.
+							Nacimiento:</strong></td>
+					<td style="padding-left: 10px;">{{
+						customer_selected.fechaNacimiento}}</td>
+
+				</tr>
+				<tr>
+					<td style="text-align: right; width: 200px;"><strong>Nombre:</strong></td>
+					<td style="padding-left: 10px;">{{ customer_selected.nombre}}</td>
+				</tr>
+				<tr>
+					<td style="text-align: right; width: 200px;"><strong>Paterno:</strong></td>
+					<td style="padding-left: 10px;">{{
+						customer_selected.aPaterno}}</td>
+				</tr>
+				<tr>
+
+					<td style="text-align: right; width: 200px;"><strong>Materno:</strong></td>
+					<td style="padding-left: 10px;">{{
+						customer_selected.aMaterno}}</td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<table id="general_info_contact" style="margin-top: 15px;">
+				<tr>
+					<td style="text-align: right; width: 200px;"><strong>Calle:</strong></td>
+					<td style="padding-left: 10px;">{{ customer_selected.calle}}</td>
+
+				</tr>
+				<tr>
+					<td style="text-align: right; width: 200px;"><strong>C.P.:</strong></td>
+					<td style="padding-left: 10px;">{{ customer_selected.cp}}</td>
+				</tr>
+				<tr>
+					<td style="text-align: right; width: 200px;"><strong>Colonia:</strong></td>
+					<td style="padding-left: 10px;">{{ customer_selected.colonia}}</td>
+				</tr>
+				<tr>
+					<td style="text-align: right; width: 200px;"><strong>Del/Mnpo:</strong></td>
+					<td style="padding-left: 10px;">{{ customer_selected.mnpo}}</td>
+				</tr>
+				<tr ng-repeat="contact in contacts">
+					<td style="text-align: right; width: 200px;"><strong>{{
+							contact.tipo}}:</strong></td>
+					<td style="padding-left: 10px;">{{ contact.valor}}</td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<br />
+			<table style="width: 500px; border: 1px solid #bdbdbd;"
+				id="clientLastExam">
+				<tr>
+					<td></td>
+					<td>Esfera</td>
+					<td>Cilindro</td>
+					<td>Eje</td>
+					<td>Ad</td>
+				</tr>
+				<tr>
+					<td>O. D.</td>
+					<td>{{ customer_selected.ultimoExamen.esfera_derecho}}</td>
+					<td>{{ customer_selected.ultimoExamen.cilindro_derecho}}</td>
+					<td>{{ customer_selected.ultimoExamen.eje_derecho}}</td>
+					<td>{{ customer_selected.ultimoExamen.av_derecho}}</td>
+				</tr>
+				<tr>
+					<td>O. I.</td>
+					<td>{{ customer_selected.ultimoExamen.esfera_izquierdo}}</td>
+					<td>{{ customer_selected.ultimoExamen.cilindro_izquierdo}}</td>
+					<td>{{ customer_selected.ultimoExamen.eje_izquierdo}}</td>
+					<td>{{ customer_selected.ultimoExamen.av_izquierdo}}</td>
+				</tr>
+			</table>
+
+		</div>
+
+	</div>
+	
+</body>
+</html>

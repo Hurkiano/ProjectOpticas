@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grand Vision</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<link type="text/css" rel="stylesheet"
+	href="font/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/jquery-ui.css"></link>
+<link type="text/css" rel="stylesheet" href="css/clientes.css" />
+<link rel="stylesheet" href="css/app.css"></link>
+
+<script src="js/jquery.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/clientesJQ.js"></script>
+<script src="js/jquery-ui.js"></script>
+</head>
+<body ng-app="myApp" style="padding-left: 20px; padding-right: 20px;"
+	data-ng-controller="agregarClienteController">
+	<div class="container agregar-cliente panel panel-primary">
+		<div class="panel-heading title-section">Cliente</div>
+
+		<!--  meter tabs -->
+		<div id="tabs_seccion_cliente">
+			<ul ng-show="cliente_existe != null">
+				<li><a href="#tabs-Cliente">Cliente</a></li>
+				<li><a href="#tabs-2">Rx</a></li>
+				<li><a href="#tabs-3">Actividad</a></li>
+			</ul>
+			<div id="tabs-Cliente">
+				<form>
+					<div class="panel-body" id="agregar-cliente">
+						<div class="wrapper">
+							<div class="table-cell">
+								<div class="table-cell-50">
+									<div class="table-cell">
+										<label for="nombre">Nombre</label> <input
+											onblur="javascript:this.value=this.value.toUpperCase();"
+											type="text" data-ng-model="inputNombreCliente" id="nombre"
+											name="nombre" />
+									</div>
+									<div class="table-cell">
+										<label for="apellido-paterno">Apellido Paterno</label> <input
+											onblur="javascript:this.value=this.value.toUpperCase();"
+											type="text" data-ng-model="inputApaterno"
+											id="apellido-paterno" name="apellido-paterno" />
+									</div>
+									<div class="table-cell">
+										<label for="apellido-materno">Apellido Materno</label> <input
+											onblur="javascript:this.value=this.value.toUpperCase();"
+											type="text" data-ng-model="inputAMaterno"
+											id="apellido-materno" name="apellido-materno" />
+									</div>
+								</div>
+								<div class="table-cell-50">
+									<div class="table-cell">
+										<label for="sexo">Sexo</label> <select
+											class="form-control max-200" name="sexo"
+											data-ng-model="inputSexo" id="sexo">
+											<option ng-selected="{{inputSexo == 'H'}}" value="H">Masculino</option>
+											<option ng-selected="{{inputSexo == 'M'}}" value="M">Femenino</option>
+										</select>
+									</div>
+									<div class="table-cell">
+										<label for="fecha-nac">F. Nacimiento</label> <input
+											type="text" data-ng-model="inputFNacimiento" id="fecha-nac"
+											name="fecha-nac" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="line"></div>
+						<h1 class="title">Contacto</h1>
+
+						<div class="wrapper">
+							<div class="table-cell">
+								<label for="correo">Correo</label> <span> <input
+									type="mail" name="correo" data-ng-model="contactoCorreo"
+									id="correo" /> @ <select class="form-control max-200"
+									data-ng-model="contactoCorreoCompania" name="sexo" id="sexo">
+										<option value="hotmail.com">hotmail.com</option>
+										<option value="yahoo.com">yahoo.com</option>
+										<option value="gmail.com">gmail.com</option>
+								</select>
+								</span>
+							</div>
+
+							<div class="table-cell">
+								<label for="celular">Celular</label> <input
+									data-ng-model="contactoCellular" name="celular" id="celular"
+									type="number" />
+							</div>
+							<div class="table-cell">
+								<label for="telefono">Teléfono</label> <input
+									data-ng-model="contactoTelefono" type="number" name="telefono"
+									id="telefono" />
+								<button ng-show="cliente_existe != null"
+									id="dialog_agregar_contacto_link" type="button"
+									class="add-button btn-default glyphicon glyphicon-plus"></button>
+							</div>
+						</div>
+
+						<div class="line"></div>
+						<h1 class="title">Dirección</h1>
+						<div class="wrapper">
+							<div class="table-cell">
+								<label for="calle-numero">Calle y Número</label> <input
+									onblur="javascript:this.value=this.value.toUpperCase();"
+									data-ng-model="inputCalleNum" type="text" id="calle-numero"
+									name="calle-numero" />
+							</div>
+							<div class="table-cell">
+								<label for="cp">C.P</label> <input ng-blur="obtenerCP();"
+									type="text" data-ng-model="inputCP" id="cp" name="cp" />
+							</div>
+							<div class="table-cell">
+								<label for="colonia">Colonia</label> <select
+									class="form-control max-200" ng-model="inputColonia">
+									<option ng-repeat="dato in arrayCol track by $index"
+										value="{{dato}}" ng-selected="{{dato == inputColonia}}">
+										{{dato}}</option>
+								</select>
+							</div>
+							<div class="table-cell">
+								<label for="delegacion">Delegación/Mnpo</label> <input
+									onblur="javascript:this.value=this.value.toUpperCase();"
+									type="text" data-ng-model="inputMnpo" id="delegacion"
+									name="delegacion"  disabled="disabled"/>
+							</div>
+							<div class="table-cell">
+								<label for="estado">Estado</label> <input type="text"
+									onblur="javascript:this.value=this.value.toUpperCase();"
+									data-ng-model="inputEdo" id="estado" name="estado"  disabled="disabled" />
+							</div>
+						</div>
+
+						<div class="line"></div>
+						<h1 class="title">Observaciones</h1>
+						<div class="wrapper">
+							<textarea data-ng-model="inputObs" name="observaciones"
+								onblur="javascript:this.value=this.value.toUpperCase();"
+								id="observaciones" cols="30" rows="10"></textarea>
+						</div>
+
+						<div class="wrapper">
+							<button ng-show="cliente_existe != null"
+								ng-click="goAnteojos(idCliente);" class="btn-default">Anteojos
+								Iniciales</button>
+							<button ng-show="cliente_existe != null" class="btn-default">Antecedentes</button>
+							<button ng-show="cliente_existe != null" class="btn-default">Examen</button>
+							<button type="submit" class="btn-default btn-success"
+								ng-click="submit();">Guardar</button>
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+			<div id="tabs-2"></div>
+			<div id="tabs-3"></div>
+		</div>
+	</div>
+	<div id="dialog_agrega_contacto" title="Agregar Contacto"></div>
+	<script type="text/javascript">
+		$(document).click(function(e) {
+			e.preventDefault();
+		});
+	</script>
+</body>
+</html>
